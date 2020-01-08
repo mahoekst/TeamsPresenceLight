@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Icon1.ico" />
+    <None Remove="Resources\NotifyIcon.ico" />
+    <None Remove="Resources\NotifyIcon2.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.7.1" />
+    <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NotifyIcon2.ico" />
+    <Reference Include="Blynclight">
+      <HintPath>..\..\..\..\..\..\scratch\Embrava_SDK_For_Windows_v3.0.4\Embrava_SDK_For_Windows_v3.0.4\BlynclightTest_Software_Source\BlyncLightTest_v3.0.25\Blynclight.dll</HintPath>
+    </Reference>
+    <Resource Include="Resources\Icon1.ico" />
+    <Resource Include="Resources\NotifyIcon.ico" />
+  </ItemGroup>
+
+</Project>

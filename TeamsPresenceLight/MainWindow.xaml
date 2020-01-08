@@ -1,0 +1,49 @@
+﻿<Window x:Class="EmbravaTeamsPresenceNotifications.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:l="clr-namespace:EmbravaTeamsPresenceNotifications"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <l:NotifyIcon
+			x:Name="notifyIcon"
+			Text="{Binding ElementName=tipText,Path=Text}"
+			Icon="Resources/NotifyIcon.ico"
+			MouseDoubleClick="OnNotifyIconDoubleClick">
+            <l:NotifyIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Open" Click="OnOpenClick" />
+                    <MenuItem Header="Exit" Click="OnExitClick" />
+                </ContextMenu>
+            </l:NotifyIcon.ContextMenu>
+        </l:NotifyIcon>
+        <WrapPanel VerticalAlignment="Center">
+            <TextBlock FontWeight="Bold" Text="Connected Account: "/>
+            <TextBlock x:Name="accountName" Text="none" />
+        </WrapPanel>
+        <Line />
+        <Button x:Name="AccountButton" Content="Connect Azure Active Directory Account" Click="OnAccountClick" />
+        <Button x:Name="SignOutButton" Content="Sign-Out" Click="OnSignOutClick" />
+        <Line/>
+        <WrapPanel VerticalAlignment="Center">
+            <TextBlock Text="Presence poll interval: "></TextBlock>
+            <TextBox x:Name="PollingInterval">1</TextBox>
+        </WrapPanel>
+        <Line/>
+
+        <Button x:Name="GetPresenceButton" Content="TEST GetPresence" Click="GetPresenceClick" />
+        <Button x:Name="ConnectLightButton" Content="TEST connecttoLight" Click="ConnectLightClick" />
+        <Line/>
+        <TextBlock FontWeight="Bold" Text="Embrava configuration:" Margin="0,30,0,0" />
+        <ComboBox x:Name="EmbravaDeviceList" SelectionChanged="EmbravaDeviceList_SelectionChanged">
+        </ComboBox>
+        <Line/>
+        <TextBlock Margin="0,30,0,0" FontWeight="Bold" Text="Presence and Color configuration:"/>
+        <Line/>
+        <TextBlock Margin="0,50,0,0" Text="Log:" FontWeight="Bold"/>
+        <TextBlock x:Name="ResultText" TextWrapping="Wrap"/>
+    </StackPanel>
+
+</Window>
