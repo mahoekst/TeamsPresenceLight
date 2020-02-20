@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Platforms>x64</Platforms>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
@@ -28,7 +29,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\NotifyIcon2.ico" />
     <Reference Include="Blynclight">
-      <HintPath>..\..\..\..\..\..\scratch\Embrava_SDK_For_Windows_v3.0.4\Embrava_SDK_For_Windows_v3.0.4\BlynclightTest_Software_Source\BlyncLightTest_v3.0.25\Blynclight.dll</HintPath>
+      <HintPath>lib\Blynclight.dll</HintPath>
     </Reference>
     <Resource Include="Resources\Icon1.ico" />
     <Resource Include="Resources\NotifyIcon.ico" />
