@@ -2,16 +2,34 @@ name: .NET Core
 
 on: [push]
 
+env:
+  configuration: Release
+  signTool: '"C:\\Program Files (x86)\\Windows Kits\\10\bin\\10.0.18362.0\\x86\\signtool.exe"'
+  platform: x86
+
 jobs:
   build:
 
-    runs-on: [windows-latest]
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.108
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
+        fetch-depth: 0
+
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
+  
+    - name: Use Nerdbank.GitVersioning to set version variables
+      uses: aarnott/nbgv@v0.3
+      with:
+        setAllVars: true
+
+    - name: Update manifest version
+      run: |
+        [xml]$manifest = get-content ".\TeamsPresenceLightPackaging\Package.appxmanifest"
+        $manifest.Package.Identity.Version = "${{env.NBGV_SIMPLEVERSION}}.0"
+        $manifest.save(".\TeamsPresenceLightPackaging\Package.appxmanifest")
+    
+    - name: Build
+      run: msbuild TeamsPresenceLight.sln /p:Configuration=${{env.configuration}} /p:Platform=${{env.platform}} /restore /p:AppxPackageDir=${{github.workspace}}\AppPackages /p:AppxBundlePlatforms=${{env.platform}} /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxPackageSigningEnabled=false
